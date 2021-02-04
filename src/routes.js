@@ -26,7 +26,7 @@ async function routes (fastify, options) {
     });
 
     fastify.get('/', (request, reply) => {
-        return reply.send(request.user ? {message: `Logged as ${request.user.username}`} : {message: "Please log in"})
+        return reply.view('home')
     });
 }
 

@@ -16,6 +16,8 @@
     "fastify-cookie": "^5.1.0",
     "fastify-jwt": "^2.3.0",
     "fastify-plugin": "^3.0.0",
+    "point-of-view": "^4.11.0",
+    "pug": "^3.0.0",
     "sequelize": "^6.5.0",
     "sequelize-fastify": "^1.0.5",
     "sqlite3": "^5.0.1"

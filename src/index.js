@@ -1,17 +1,25 @@
 'use strict';
 
+const path = require('path'); 
 const fastify = require('fastify')({ logger: true });
 fastify.register(require('fastify-cookie'));
+fastify.register(require('point-of-view'), {
+  engine: {
+    pug: require('pug')
+  },
+  root: path.join(__dirname, 'views'),
+  viewExt: 'pug',
+})
 
 fastify.register(require('./plugins/dbConnector'));
 fastify.register(require('./plugins/userModel'));
 fastify.register(require('./plugins/authentication'));
 fastify.register(require('./routes'));
 
-fastify.addHook('onRequest', async (request, reply) => {
+fastify.addHook('onRequest', async (request, reply) => { // todo: check fastify-auth plugin
   try {
-    await request.jwtVerify();
-  } catch(err) {};
+    await request.jwtVerify(); // Assigns jwt token values to request.user object at every request
+  } catch(err) { }; // Just means that the user is not authenticated, so request.user == null, do nothing
 })
 
 fastify.listen(4000, (err, address) => {

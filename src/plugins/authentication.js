@@ -10,16 +10,16 @@ const authentication = async function(fastify, opts) {
         }
     })
 
-    fastify.decorate("authenticate", async function(request, reply) { // Denies access to routes to non authenticated users
+    fastify.decorate("authenticate", async function(request, reply) { // Denies access to routes to not authenticated users
       if (!request.user) {
         return reply.code(401).send({error: "Not authenticated"})
-      }
+      } 
     })
 
     fastify.decorate("authenticateAdmin", async function(request, reply) { // Denies access to routes to non admin users 
       if (!request.user && request.user.role !== "admin") {
         return reply.code(401).send({error: "Not authorized"});
-      }
+      } 
     });
 }
 
