@@ -59,7 +59,8 @@ const controllers = {
                 helpers.sendGenericLoginError(reply); // to do: add a delay for preventing side-channel timing attacks
             } else {
                 bcrypt.compare(password, res.password, function(err, result) {
-                    if (!err) {
+                    if (!err && result) {
+                        console.log(result);
                         helpers.sendAuthCookie(reply, fastify, { username: res.username, role: res.role });
                     } else {
                         helpers.sendGenericLoginError(reply);

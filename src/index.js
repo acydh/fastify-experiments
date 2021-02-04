@@ -9,7 +9,8 @@ fastify.register(require('point-of-view'), {
   },
   root: path.join(__dirname, 'views'),
   viewExt: 'pug',
-})
+});
+fastify.register(require('fastify-formbody'));
 
 fastify.register(require('./plugins/dbConnector'));
 fastify.register(require('./plugins/userModel'));

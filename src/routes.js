@@ -26,7 +26,7 @@ async function routes (fastify, options) {
     });
 
     fastify.get('/', (request, reply) => {
-        return reply.view('home')
+        return reply.view('home', {user: request.user})
     });
 }
 

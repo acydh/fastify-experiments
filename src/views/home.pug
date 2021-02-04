@@ -6,17 +6,22 @@ html(lang='en')
         header
             h1#title Fastify experiments
 
-        section#login-form
-            h2 Login
-            form
-                input(type='text', name="username", placeholder="username")
-                input(type='text', name="password", placeholder="password")
-                button(type="submit") login
+        if user
+            section#greetings Hello #{user.username}
+            form(method="POST", action="/api/logout")
+                button(type="submit") logout
+        else
+            section#login-form
+                h2 Login
+                form(action="/api/login",method="POST")
+                    input(type='text', name="username", placeholder="username")
+                    input(type='text', name="password", placeholder="password")
+                    button(type="submit") login
 
-        section#register-form
-            h2 Register
-            form
-                input(type='text', name="username", placeholder="username")
-                input(type='text', name="password", placeholder="password")
-                input(type='text', name="repeatPassword", placeholder="repeat password")
-                button(type="submit") register
+            section#register-form
+                h2 Register
+                form(action="/api/signup",method="POST")
+                    input(type='text', name="username", placeholder="username")
+                    input(type='text', name="password", placeholder="password")
+                    input(type='text', name="repeatPassword", placeholder="repeat password")
+                    button(type="submit") register
