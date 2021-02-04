@@ -1,0 +1,26 @@
+{
+  "name": "fastify-experiments",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "start-dev": "nodemon ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Acydh",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "fastify": "^3.8.0",
+    "fastify-cookie": "^5.1.0",
+    "fastify-jwt": "^2.3.0",
+    "fastify-plugin": "^3.0.0",
+    "sequelize": "^6.5.0",
+    "sequelize-fastify": "^1.0.5",
+    "sqlite3": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
