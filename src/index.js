@@ -1,3 +1,5 @@
+'use strict';
+
 const fastify = require('fastify')({ logger: true });
 fastify.register(require('fastify-cookie'));
 
