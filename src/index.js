@@ -8,6 +8,12 @@ fastify.register(require('./plugins/userModel'));
 fastify.register(require('./plugins/authentication'));
 fastify.register(require('./routes'));
 
+fastify.addHook('onRequest', async (request, reply) => {
+  try {
+    await request.jwtVerify();
+  } catch(err) {};
+})
+
 fastify.listen(4000, (err, address) => {
   if (err) {
     fastify.log.error(err)

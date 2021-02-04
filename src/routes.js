@@ -25,7 +25,7 @@ async function routes (fastify, options) {
         return reply.send({message: `Logged as ${request.user.username}`})
     });
 
-    fastify.get('/', { preValidation: [fastify.getToken] }, (request, reply) => {
+    fastify.get('/', (request, reply) => {
         return reply.send(request.user ? {message: `Logged as ${request.user.username}`} : {message: "Please log in"})
     });
 }
