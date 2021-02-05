@@ -11,7 +11,7 @@ module.exports = {
             .view('login', { error: "invalid user/password combination" });
     },
 
-    sendAuthCookie: (reply, fastify, payload) => {
+    setAuthCookie: (reply, fastify, payload) => {
         const token = fastify.jwt.sign(payload);
         reply
             .setCookie('token', token, { // todo: Set options in a .env for dev/prod
@@ -21,9 +21,5 @@ module.exports = {
                 httpOnly: true,
                 sameSite: true 
             });
-        console.log(token);
-        payload.role === 'admin' ? 
-            reply.redirect('/admin') :
-            reply.redirect('/');
     }
 }

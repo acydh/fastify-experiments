@@ -34,7 +34,8 @@ const controllers = {
                 });
                 return newUser.save()
                     .then(res => {
-                        helpers.sendAuthCookie(reply, fastify, { username: res.username, role: res.role });
+                        helpers.setAuthCookie(reply, fastify, { username: res.username, role: res.role });
+                        reply.redirect('/');
                     })
                     .catch(err => {
                         console.log(err);
@@ -60,7 +61,10 @@ const controllers = {
             } else {
                 bcrypt.compare(password, res.password, function(err, result) {
                     if (!err && result) {
-                        helpers.sendAuthCookie(reply, fastify, { username: res.username, role: res.role });
+                        helpers.setAuthCookie(reply, fastify, { username: res.username, role: res.role });
+                        res.role === 'admin' ?
+                            reply.redirect('admin') : 
+                            reply.redirect('/');
                     } else {
                         helpers.sendGenericLoginError(reply);
                     }  

@@ -13,14 +13,12 @@ async function routes (fastify, options) {
         return reply.view('/admin', { user: request.user });
     });
 
+    
+
     // Authenticated routes
 
     fastify.get('/protected', { preValidation: [fastify.authenticate] }, (request, reply) => {
         return reply.send({message: `Logged as ${request.user.username}`})
-    });
-
-    fastify.post('/signup', { schema: schemas.signupSchema }, (request, reply) => {
-        return controllers.signup(request, reply, fastify)
     });
     
     fastify.post('/logout', { preValidation: [fastify.authenticate] }, (request, reply) => {
@@ -35,13 +33,23 @@ async function routes (fastify, options) {
         return reply.view('home', {user: request.user})
     });
 
+    fastify.get('/login', (request, reply) => {
+        return reply.view('login');
+    });
+
+    fastify.get('/signup', (request, reply) => {
+        return reply.view('signup');
+    });
+
     fastify.post('/login', (request, reply) => {
         return controllers.login(request, reply, fastify)
     });
 
-    fastify.get('/login', (request, reply) => {
-        return reply.view('login');
+    fastify.post('/signup', { schema: schemas.signupSchema }, (request, reply) => {
+        return controllers.signup(request, reply, fastify)
     });
+
+    
 }
 
 module.exports = fastifyPlugin(routes);
