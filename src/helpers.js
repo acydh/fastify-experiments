@@ -7,7 +7,8 @@ module.exports = {
     },
 
     sendGenericLoginError: (reply) => {
-        reply.code(400).send(JSON.stringify({ error: "invalid user/password combination" }));
+        reply
+            .view('login', { error: "invalid user/password combination" });
     },
 
     sendAuthCookie: (reply, fastify, payload) => {
@@ -19,9 +20,10 @@ module.exports = {
                 secure: false, 
                 httpOnly: true,
                 sameSite: true 
-            })
-            .code(200)
-            .send(JSON.stringify({ message: "Authenticated" }));
+            });
+        console.log(token);
+        payload.role === 'admin' ? 
+            reply.redirect('/admin') :
+            reply.redirect('/');
     }
-
 }

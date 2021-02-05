@@ -5,17 +5,17 @@ const bcrypt = require('bcrypt');
 
 const controllers = {
 
-    getUsers: async (request, reply, fastify) => {
-        const users = await fastify.userModel.findAll();
-        reply
-            .code(200)
-            .send(JSON.stringify(users));
-    },
+    // getUsers: async (request, reply, fastify) => {
+    //     const users = await fastify.userModel.findAll();
+    //     reply
+    //         .code(200)
+    //         .send(JSON.stringify(users));
+    // },
 
     signup: async (request, reply, fastify) => {
         const { username, password, repeatPassword } = request.body;
         if (password !== repeatPassword) {
-            return reply.code(409).send({ error: "Passwords must coincide" });
+            return reply.code(409).view('signup', { error: "Passwords must coincide" });
         }
         const userExists = await fastify.userModel.findOne({
             where: {
@@ -23,7 +23,7 @@ const controllers = {
             }
         });
         if (userExists) {
-            return reply.code(409).send({ error: "Username already taken" });
+            return reply.code(409).view('signup', { error: "Username already taken" });
         }
         bcrypt.hash(password, 13) 
             .then(hash => {
@@ -60,7 +60,6 @@ const controllers = {
             } else {
                 bcrypt.compare(password, res.password, function(err, result) {
                     if (!err && result) {
-                        console.log(result);
                         helpers.sendAuthCookie(reply, fastify, { username: res.username, role: res.role });
                     } else {
                         helpers.sendGenericLoginError(reply);
@@ -76,9 +75,8 @@ const controllers = {
 
     logout: (request, reply, fastify) => {
         reply
-            .code(200)
             .clearCookie('token', {path: '/'})
-            .send({message: "Logged out"})
+            .redirect('/')
     }
 }
 

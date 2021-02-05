@@ -8,20 +8,11 @@ html(lang='en')
 
         if user
             section#greetings Hello #{user.username}
-            form(method="POST", action="/api/logout")
+            form(method="POST", action="/logout")
                 button(type="submit") logout
         else
-            section#login-form
-                h2 Login
-                form(action="/api/login",method="POST")
-                    input(type='text', name="username", placeholder="username")
-                    input(type='text', name="password", placeholder="password")
-                    button(type="submit") login
-
-            section#register-form
-                h2 Register
-                form(action="/api/signup",method="POST")
-                    input(type='text', name="username", placeholder="username")
-                    input(type='text', name="password", placeholder="password")
-                    input(type='text', name="repeatPassword", placeholder="repeat password")
-                    button(type="submit") register
+            ul
+                li
+                    a(href="/login") Login
+                li
+                    a(href="/register") Register

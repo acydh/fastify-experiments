@@ -1,0 +1,11 @@
+doctype html
+html(lang='en')
+    head
+        title Experiments
+    body
+        header
+            h1#title Admin Dashboard
+
+        section#greetings Hello #{user.username}
+        form(method="POST", action="/logout")
+            button(type="submit") logout

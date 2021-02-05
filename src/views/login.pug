@@ -1,0 +1,15 @@
+doctype html
+html(lang='en')
+    head
+        title Experiments
+    body
+        header
+            h1#title Fastify experiments
+
+        section#login-form
+            h2 Login
+            form(action="/login",method="POST")
+                input(type='text', name="username", placeholder="username")
+                input(type='text', name="password", placeholder="password")
+                button(type="submit") login
+            p(style="color:red") #{error}

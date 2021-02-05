@@ -1,0 +1,16 @@
+doctype html
+html(lang='en')
+    head
+        title Experiments
+    body
+        header
+            h1#title Fastify experiments
+
+        section#register-form
+            h2 Register
+            form(action="/signup",method="POST")
+                    input(type='text', name="username", placeholder="username")
+                    input(type='text', name="password", placeholder="password")
+                    input(type='text', name="repeatPassword", placeholder="repeat password")
+                    button(type="submit") register
+            p(style="color:red") #{error}
